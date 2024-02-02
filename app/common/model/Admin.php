@@ -13,12 +13,12 @@ class Admin extends Model{
     public function login($data){
         $validate = new AdminValidate();
         if(!$validate->scene("login")->check($data)){
-            return "用户名密码不能为空";
+            return $validate->getError();
         };
-        $res = $data->save();
+        $res = $this->where($data)->find;
         if($res){
             return 1;
         }
-        return "登录失败";
+        return "用户名或密码错误"; 
     }
 }
